@@ -77,9 +77,10 @@
     <header>
         <div class="logo">🍇 <strong>CatFruit</strong> Management</div>
         <nav>
-            <a href="#members">섬원 목록</a>
+            <a href="#members">섬원목록</a>
             <a href="#rules">규칙</a>
-            <a href="#quota">기타 정보</a>
+            <a href="#quota">기타정보</a>
+            <a href="#calculator">계산기</a>
             <a href="#minigames">미니게임</a>
         </nav>
     </header>
@@ -289,6 +290,15 @@
         </div>
     </section>
 
+    <section id="calculator">
+        <div class="card">
+            <h2>🧮 CatFruit 계산기</h2>
+            <div class="btn-grid">
+                <button class="member-btn" onclick="openModal('calcModal')">🧮 계산기</button>
+            </div>
+        </div>
+    </section>
+
     <section id="minigames">
         <div class="card">
             <h2>🎮 미니게임 목록</h2>
@@ -299,6 +309,103 @@
             </div>
         </div>
     </section>
+
+    <div id="calcModal" class="modal">
+        <div class="modal-content" style="width: 460px; max-height: 85vh; overflow-y: auto;">
+            <button class="close-btn" onclick="closeModal('calcModal')">닫기 ✖</button>
+            <h3 style="color: #6a0dad; margin-bottom: 20px;">🧮 CatFruit 계산기</h3>
+            
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+                <!-- 1. 아삭한 수박 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">🍉 아삭한 수박</span> <span style="font-size: 0.8rem; color: #888;">(24,960원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('crispyWatermelon', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-crispyWatermelon" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('crispyWatermelon', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+
+                <!-- 2. 사악한 수박 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">😈 사악한 수박</span> <span style="font-size: 0.8rem; color: #888;">(349,440원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('evilWatermelon', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-evilWatermelon" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('evilWatermelon', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+
+                <!-- 3. 햄버거 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">🍔 햄버거</span> <span style="font-size: 0.8rem; color: #888;">(204,288원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('burger', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-burger" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('burger', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+
+                <!-- 4. 광물주머니 (새로 요청하신 아이템) -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">💰 광물주머니</span> <span style="font-size: 0.8rem; color: #888;">(163,968원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('oreBag', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-oreBag" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('oreBag', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+
+                <!-- 5. 철 블록 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">⬜ 철 블록</span> <span style="font-size: 0.8rem; color: #888;">(23,215원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('ironBlock', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-ironBlock" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('ironBlock', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+
+                <!-- 6. 금 블록 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">🟨 금 블록</span> <span style="font-size: 0.8rem; color: #888;">(31,450원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('goldBlock', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-goldBlock" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('goldBlock', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+
+                <!-- 7. 다이아몬드 블록 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">🟦 다이아몬드 블록</span> <span style="font-size: 0.8rem; color: #888;">(50,920원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('diamondBlock', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-diamondBlock" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('diamondBlock', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+
+                <!-- 8. 에메랄드 블록 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; background: white; padding: 10px 15px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.03);">
+                    <div><span style="font-weight: bold;">🟩 에메랄드 블록</span> <span style="font-size: 0.8rem; color: #888;">(58,410원)</span></div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <button onclick="changeCalcCount('emeraldBlock', -1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">-</button>
+                        <input type="number" id="calc-emeraldBlock" value="0" min="0" oninput="updateTotalAmount()" style="width: 60px; text-align: center; border: 1px solid #ddd; border-radius: 5px; padding: 4px; font-weight: bold;">
+                        <button onclick="changeCalcCount('emeraldBlock', 1)" style="width: 28px; height: 28px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; background: #f3ebff; font-weight: bold;">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 총합 금액 보드판 -->
+            <div style="width: 100%; background: #6a0dad; color: white; padding: 15px; border-radius: 15px; text-align: center; box-sizing: border-box;">
+                <div style="font-size: 0.85rem; opacity: 0.85; margin-bottom: 4px;">합산 총 금액</div>
+                <div style="font-size: 1.7rem; font-weight: 800;" id="calc-total-amount">0 원</div>
+            </div>
+
+            <button onclick="resetCalculator()" style="margin-top: 15px; border: none; background: none; color: #999; cursor: pointer; text-decoration: underline;">계산기 초기화</button>
+        </div>
+    </div>
 
     <div id="reflexModal" class="modal">
         <div class="modal-content">
@@ -422,6 +529,44 @@
             }
         }
         function resetReflex() { clearTimeout(rtTimeout); rtStatus='init'; area.className='state-result'; main.innerText="시작하기"; }
+
+        function changeCalcCount(type, amount) {
+            const input = document.getElementById('calc-' + type);
+            let currentVal = parseInt(input.value) || 0;
+            currentVal += amount;
+            if (currentVal < 0) currentVal = 0;
+            input.value = currentVal;
+            updateTotalAmount();
+        }
+
+        function updateTotalAmount() {
+            const priceTable = {
+                crispyWatermelon: 24960,
+                evilWatermelon: 349440,
+                burger: 204288,
+                oreBag: 163968, // 광물주머니 추가
+                ironBlock: 23215,
+                goldBlock: 31450,
+                diamondBlock: 50920,
+                emeraldBlock: 58410
+            };
+
+            let total = 0;
+            for (const key in priceTable) {
+                const count = parseInt(document.getElementById('calc-' + key).value) || 0;
+                total += count * priceTable[key];
+            }
+
+            document.getElementById('calc-total-amount').innerText = total.toLocaleString() + " 원";
+        }
+
+        function resetCalculator() {
+            const keys = ['crispyWatermelon', 'evilWatermelon', 'burger', 'oreBag', 'ironBlock', 'goldBlock', 'diamondBlock', 'emeraldBlock'];
+            keys.forEach(key => {
+                document.getElementById('calc-' + key).value = 0;
+            });
+            updateTotalAmount();
+        }
     </script>
 </body>
 </html>
