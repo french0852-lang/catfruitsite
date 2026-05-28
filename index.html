@@ -89,16 +89,15 @@
             <h2>🍇 섬원 정보</h2>
             <div class="btn-grid">
                 <button class="member-btn" onclick="showDetail(event, 'grape')">👑 섬장</button>
-                <button class="member-btn" onclick="showDetail(event, 'lime')">⭐ 부섬장</button>
+                <button class="member-btn" onclick="showDetail(event, 'lime')">⭐ 간부</button>
                 <button class="member-btn" onclick="showDetail(event, 'mung')">👤 섬원</button>
             </div>
             <div id="grape" class="detail-box">
                 <h3>👑 섬장 상세정보</h3>
                 <p><span class="info-label">닉네임:</span> Grape__</p>
-                <p><span class="info-label">별명:</span> 포도</p>
+                <p><span class="info-label">별명:</span> 왕포도</p>
                 <p><span class="info-label">나이:</span> 28</p>
                 <p><span class="info-label">성별:</span> 남자</p>
-                <p><span class="info-label">특징:</span> 포도를 싫어한다.</p>
             </div>
             <div id="lime" class="detail-box">
                 <h3>⭐ 부섬장 상세정보</h3>
@@ -106,21 +105,56 @@
                 <p><span class="info-label">별명:</span> 라임</p>
                 <p><span class="info-label">나이:</span> 24</p>
                 <p><span class="info-label">성별:</span> 남자</p>
-                <p><span class="info-label">특징:</span> 노동을 좋아한다.</p>
                 <br>
                 <p><span class="info-label">닉네임:</span> GyeonMung_0</p>
                 <p><span class="info-label">별명:</span> 견뭉</p>
                 <p><span class="info-label">나이:</span> 21</p>
                 <p><span class="info-label">성별:</span> 남자</p>
-                <p><span class="info-label">특징:</span> 도박을 좋아한다.</p>
+                <br>
+                <br>
+                <h3>⭐ 간부 상세정보</h3>
+                <p><span class="info-label">닉네임:</span> myo_soon2</p>
+                <p><span class="info-label">별명:</span> 묘순</p>
+                <p><span class="info-label">나이:</span> 28</p>
+                <p><span class="info-label">성별:</span> 여자</p>
+                <br>
+                <p><span class="info-label">닉네임:</span> podosandwich</p>
+                <p><span class="info-label">별명:</span> 포도</p>
+                <p><span class="info-label">나이:</span> 26</p>
+                <p><span class="info-label">성별:</span> 여자</p>
+                <br>
             </div>
             <div id="mung" class="detail-box">
                 <h3>👤 섬원 상세정보</h3>
-                <p><span class="info-label">닉네임:</span> Danbi__rr</p><p><span class="info-label">별명:</span> 단비</p><p><span class="info-label">나이:</span> 25</p>
+                <p><span class="info-label">닉네임:</span> Danbi__rr</p>
+                <p><span class="info-label">별명:</span> 단비</p>
+                <p><span class="info-label">나이:</span> 25</p>
+                <p><span class="info-label">성별:</span> 여자</p>
                 <br>
-                <p><span class="info-label">닉네임:</span> acoon0910</p><p><span class="info-label">별명:</span> 아쿤</p><p><span class="info-label">나이:</span> 21</p>
+                <p><span class="info-label">닉네임:</span> Danha_Rin</p>
+                <p><span class="info-label">별명:</span> 단하</p>
+                <p><span class="info-label">나이:</span> 22</p>
+                <p><span class="info-label">성별:</span> 여자</p>
                 <br>
-                <p><span class="info-label">닉네임:</span> ChuPPa__</p><p><span class="info-label">별명:</span> 츄파</p><p><span class="info-label">나이:</span> 21</p>
+                <p><span class="info-label">닉네임:</span> acoon0910</p>
+                <p><span class="info-label">별명:</span> 아쿤</p>
+                <p><span class="info-label">나이:</span> 21</p>
+                <p><span class="info-label">성별:</span> 여자</p>
+                <br>
+                <p><span class="info-label">닉네임:</span> ChuPPa__</p>
+                <p><span class="info-label">별명:</span> 츄파</p>
+                <p><span class="info-label">나이:</span> 21</p>
+                <p><span class="info-label">성별:</span> 여자</p>
+                <br>
+                <p><span class="info-label">닉네임:</span> ys8310</p>
+                <p><span class="info-label">별명:</span> 연수</p>
+                <p><span class="info-label">나이:</span> 21</p>
+                <p><span class="info-label">성별:</span> 남자</p>
+                <br>
+                <p><span class="info-label">닉네임:</span> wooelxsanta6</p>
+                <p><span class="info-label">별명:</span> 산타</p>
+                <p><span class="info-label">나이:</span> 19</p>
+                <p><span class="info-label">성별:</span> 남자</p>
             </div>
         </div>
     </section>
@@ -184,25 +218,17 @@
                 <button class="member-btn" onclick="showDetail(event, 'qwe')">📋 기타</button>
             </div>
             <div id="quota_table" class="detail-box">
-                <h3>📊 일일 할당량 안내</h3>
+                <h3>📊 일주일 할당량 안내</h3>
                 <table>
                     <thead><tr><th>세트명</th><th>수량 및 조건</th></tr></thead>
                     <tbody>
                         <tr>
-                            <td><strong>🍇 포도세트</strong></td>
-                            <td>햄버거 27 세트 이상</td>
+                            <td><strong>요리세트</strong></td>
+                            <td>사악한 도시락 14개 햄버거 2박스 사악한수박 9세트</td>
                         </tr>
                         <tr>
-                            <td><strong>🍋 라임세트</strong></td>
-                            <td>사악한수박 9 세트 및 200 만 원 이상 입금</td>
-                        </tr>
-                        <tr>
-                            <td><strong>🐶 견뭉세트</strong></td>
-                            <td>파도의결정 1 세트 및 200 만 원 이상 입금</td>
-                        </tr>
-                        <tr>
-                            <td><strong>💰 부자세트</strong></td>
-                            <td>1,500 만원 이상 입금</td>
+                            <td><strong>현금세트</strong></td>
+                            <td>섬 은행 입금 80,000,000 원</td>
                         </tr>
                     </tbody>
                 </table>
@@ -258,7 +284,7 @@
                         </tr>
                         <tr>
                             <td><strong>채광장 완료 및 제출</strong></td>
-                            <td>500 점</td>
+                            <td>점수 임시 미부여</td>
                         </tr>
                         <tr>
                             <td><strong>추천 코인</strong></td>
