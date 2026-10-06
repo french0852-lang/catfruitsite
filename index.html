@@ -34,12 +34,12 @@
 
         /* Top Header Navigation */
         header { 
-            background: rgba(9, 13, 22, 0.8); 
+            background: rgba(9, 13, 22, 0.85); 
             backdrop-filter: blur(16px);
             border-bottom: 1px solid var(--card-border);
             position: fixed; top: 0; left: 0; width: 100%;
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 12px 32px; z-index: 1000; 
+            padding: 10px 32px; z-index: 1000; 
         }
 
         .logo { 
@@ -52,6 +52,76 @@
             padding: 2px 8px; border-radius: 20px; font-weight: 600;
         }
         
+        /* Header Audio Player Bar */
+        .audio-player-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            padding: 6px 14px;
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+        }
+
+        .play-btn {
+            background: var(--accent);
+            border: none;
+            color: #fff;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 0.75rem;
+            transition: transform 0.15s ease, background 0.15s ease;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
+        }
+
+        .play-btn:hover {
+            transform: scale(1.08);
+            background: #7c3aed;
+        }
+
+        .volume-container {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .volume-icon {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+        }
+
+        .volume-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 70px;
+            height: 4px;
+            border-radius: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            outline: none;
+            cursor: pointer;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .volume-slider::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
         nav { display: flex; gap: 4px; }
         nav a { 
             color: var(--text-sub); text-decoration: none; padding: 6px 14px; 
@@ -243,6 +313,22 @@
         <div class="logo">
             🍇 CatFruit <span class="logo-badge">System</span>
         </div>
+
+        <!-- Center Audio Player -->
+        <div class="audio-player-container">
+            <audio id="bgm" loop autoplay preload="auto">
+                <source src="GrapeKingdoms.mp3" type="audio/mpeg">
+                브라우저가 오디오 태그를 지원하지 않습니다.
+            </audio>
+            <button class="play-btn" id="playBtn" onclick="togglePlay()" title="재생/일시정지">
+                ▶
+            </button>
+            <div class="volume-container">
+                <span class="volume-icon">🔊</span>
+                <input type="range" id="volumeControl" class="volume-slider" min="0" max="1" step="0.05" value="0.3" oninput="changeVolume(this.value)" title="볼륨 조절">
+            </div>
+        </div>
+
         <nav>
             <a href="#dashboard">대시보드</a>
             <a href="#tools">도구 & 미니게임</a>
@@ -312,14 +398,12 @@
                         <div class="info-grid">
                             <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Junsu2__ (준수)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">25세 / 남</span></div></div>
                             <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Sungju__ (성주)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">24세 / 남</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Lemona__</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">20세 / 남</span></div></div>
+                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Lemona__ (레몬)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">20세 / 남</span></div></div>
                             <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Ezez__ (이지)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">19세 / 남</span></div></div>
                             <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Haeynn__ (해인)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">27세 / 여</span></div></div>
                             <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Yedami__ (예담)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">23세 / 여</span></div></div>
                             <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Hyebo__ (혜보)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">23세 / 여</span></div></div>
                             <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Raniii__ (라니)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">21세 / 여</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Acoon__ (아쿤)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">21세 / 여</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Seunga__ (승아)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">21세 / 여</span></div></div>
                         </div>
                     </div>
                 </div>
@@ -425,7 +509,7 @@
         </div>
 
         <!-- Quick Tools Bottom Dashboard -->
-        <h3 id="tools" style="font-size: 1.05rem; color: var(--text-sub); margin-bottom: 12px;">🛠️ 빠른 도구 & 유틸리티</h3>
+        <h3 id="tools" style="font-size: 1.05rem; color: var(--text-sub); margin-bottom: 12px;">🛠️️ 빠른 도구 & 유틸리티</h3>
         <div class="quick-grid">
             <div class="tool-card" onclick="openModal('calcModal')">
                 <div>
@@ -500,6 +584,47 @@
     </div>
 
     <script>
+        /* Music Player Script */
+        const audio = document.getElementById('bgm');
+        const playBtn = document.getElementById('playBtn');
+
+        // 기본 음량 설정 (30%)
+        audio.volume = 0.3;
+
+        // 자동재생 처리 및 버튼 상태 업데이트
+        window.addEventListener('DOMContentLoaded', () => {
+            const playPromise = audio.play();
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    playBtn.innerText = '❚❚';
+                }).catch(() => {
+                    // 브라우저 자동재생 차단 정책이 작동할 경우
+                    playBtn.innerText = '▶';
+                    // 사용자가 페이지의 어디든 클릭하면 바로 음악 재생 시도
+                    document.body.addEventListener('click', () => {
+                        if (audio.paused) {
+                            audio.play();
+                            playBtn.innerText = '❚❚';
+                        }
+                    }, { once: true });
+                });
+            }
+        });
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                playBtn.innerText = '❚❚';
+            } else {
+                audio.pause();
+                playBtn.innerText = '▶';
+            }
+        }
+
+        function changeVolume(val) {
+            audio.volume = val;
+        }
+
         /* Category Switcher */
         function switchCategory(catId) {
             document.querySelectorAll('.category-panel').forEach(el => el.style.display = 'none');
