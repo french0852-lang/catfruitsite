@@ -1,697 +1,400 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CatFruit System</title>
-    <link rel="stylesheet" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
-    <style>
-        :root {
-            --bg: #090d16;
-            --card-bg: rgba(18, 24, 38, 0.7);
-            --card-border: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
-            --text-sub: #94a3b8;
-            --text-muted: #64748b;
-            --accent: #8b5cf6;
-            --accent-glow: rgba(139, 92, 246, 0.15);
-            --hover-bg: rgba(255, 255, 255, 0.04);
-            --radius: 12px;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080713">
+<title>포도왕국</title>
+<meta name="description" content="보랏빛 별들 사이, 포도 행성이 빛나는 세계. 포도왕국에서 모험을 시작하세요.">
+<style>
+:root{color-scheme:dark;--bg:#080713;--purple:#c5a4ff;--muted:#bdb1d1}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:#f7f1ff;font-family:system-ui,-apple-system,"Malgun Gothic","맑은 고딕",sans-serif;min-height:100vh}
+button,a{font:inherit}
+button{cursor:pointer}
+.site{position:relative;isolation:isolate;overflow:hidden;min-height:100vh;background:radial-gradient(ellipse at 50% 32%,#211538 0,#100d22 42%,#080713 76%)}
+.stars{position:absolute;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(1px 1px at 15% 12%,#fff 99%,transparent),radial-gradient(2px 2px at 80% 18%,#bca0ff 99%,transparent),radial-gradient(1px 1px at 70% 68%,#fff 99%,transparent),radial-gradient(1px 1px at 23% 74%,#a9cfff 99%,transparent),radial-gradient(1px 1px at 42% 42%,#d8c5ff 99%,transparent);background-size:170px 140px;opacity:.7;animation:starDrift 45s linear infinite}
+@keyframes starDrift{to{background-position:170px 140px}}
+header{position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:18px clamp(18px,5vw,64px);border-bottom:1px solid #ffffff14}
+.brand{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.brand-mark{width:40px;height:40px;border-radius:13px;display:grid;place-items:center;font-size:23px;background:linear-gradient(135deg,#d4a0ff,#7835c8);box-shadow:0 0 24px #a45bff44}
+.brand-name{font-weight:800;letter-spacing:1px}.brand-sub{font-size:10px;color:#a99abd;margin-top:3px}
+.nav{position:relative;z-index:2;display:flex;gap:8px;flex-wrap:wrap;padding:14px clamp(18px,5vw,64px);border-bottom:1px solid #ffffff0a}
+.pill{border:1px solid #ffffff20;background:#ffffff08;border-radius:999px;padding:9px 14px;color:#e8dcff;font-size:13px;text-decoration:none;white-space:nowrap;transition:background .2s,border-color .2s,transform .2s}
+.pill:hover,.pill.active{background:#a66bff2b;border-color:#bda0ff;transform:translateY(-1px)}
+main{position:relative;z-index:1;width:min(1200px,100%);margin:auto;padding:20px clamp(18px,4vw,48px) 38px}
+.hero{display:grid;grid-template-columns:.9fr 1.1fr;align-items:center;gap:8px;min-height:430px}
+.copy{padding:18px 4px;z-index:2}
+.eyebrow{font-size:12px;color:#c5a4ff;letter-spacing:2px;margin-bottom:18px}
+h1{font-size:clamp(36px,5vw,58px);line-height:1.16;letter-spacing:-1.7px;margin:0 0 18px;font-weight:850}
+.gradient-text{background:linear-gradient(90deg,#d8b5ff,#a9e8ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:#c1b6d5;font-size:15px;line-height:1.9;margin:0 0 24px}
+.actions{display:flex;flex-wrap:wrap;gap:9px}
+.planet-art{width:100%;max-width:570px;margin:auto;position:relative;isolation:isolate}
+.planet-glow{position:absolute;inset:15% 12%;background:#813dff;filter:blur(60px);opacity:.2;border-radius:50%;z-index:-1}
+.planet-art img{display:block;width:100%;height:auto;position:relative;mix-blend-mode:screen;mask-image:radial-gradient(ellipse 70% 68% at 50% 48%,#000 60%,#000b 78%,transparent 100%);animation:float 7s ease-in-out infinite;filter:drop-shadow(0 0 24px #8e4fff20)}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin:12px 0 14px}
+.section-head h2{font-size:18px;margin:0 0 5px}.section-head p{font-size:12px;color:#9f91b5;margin:0}
+.sparkle{font-size:11px;color:#a98ce2}
+.cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.card{display:block;width:100%;min-height:132px;border:1px solid #ffffff18;background:linear-gradient(140deg,#ffffff0d,#ffffff04);border-radius:14px;padding:17px;text-align:left;color:#fff;transition:transform .2s,border-color .2s,background .2s}
+.card:hover{border-color:#a987e7;background:#9e70ff12;transform:translateY(-3px)}
+.card-icon{font-size:23px;margin-bottom:13px}.card-title{font-weight:700;font-size:14px}.card-desc{font-size:12px;line-height:1.6;color:#a99cbd;margin-top:7px}
+.status{text-align:center;font-size:12px;color:#9384ad;margin:20px 0 0;min-height:18px}
+footer{position:relative;z-index:1;display:flex;justify-content:space-between;gap:12px;padding:17px clamp(18px,5vw,64px);border-top:1px solid #ffffff14;color:#8f82a7;font-size:12px}
+.portal{position:fixed;inset:0;z-index:10;pointer-events:none;opacity:0;background:radial-gradient(ellipse at center,#a77aff70,transparent 65%);transition:opacity .35s}
+.portal.active{opacity:1}
+.content-section{display:none;min-height:240px;padding:50px 10px;text-align:center;animation:appear .35s ease}
+.content-section.show{display:block}
+.content-section h2{font-size:clamp(30px,5vw,48px);margin:0 0 14px}
+.content-section p{color:var(--muted);line-height:1.9}
+.intro-page{display:none;text-align:left;padding:10px 0 30px;animation:appear .35s ease}
+.intro-page.show{display:block}
+.intro-hero{padding:clamp(24px,5vw,52px);border:1px solid #ffffff18;border-radius:22px;background:linear-gradient(135deg,#a16bff16,#ffffff04);margin-bottom:18px}
+.intro-kicker{font-size:12px;letter-spacing:2px;color:#c5a4ff;margin-bottom:12px}
+.intro-hero h2{font-size:clamp(30px,5vw,48px);margin:0 0 14px;letter-spacing:-1px}
+.intro-hero p{color:#c8bddb;line-height:2;margin:0;max-width:850px}
+.intro-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:14px 0}
+.intro-block{padding:22px;border:1px solid #ffffff16;border-radius:16px;background:#ffffff07}
+.intro-block h3{margin:0 0 10px;font-size:17px;color:#eadcff}
+.intro-block p,.intro-block li{color:#bdb1d1;line-height:1.9;font-size:14px}
+.intro-block p{margin:0}.intro-block ul{padding-left:20px;margin:8px 0 0}
+.intro-quote{border-left:3px solid #a77aff;padding:12px 18px;color:#ddcaff;line-height:1.9;margin:18px 0;background:#a77aff0b;border-radius:0 12px 12px 0}
+.intro-note{font-size:12px!important;color:#9284a8!important;margin-top:14px}
+@media(max-width:600px){.intro-grid{grid-template-columns:1fr}.intro-block{padding:18px}}
+@keyframes appear{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:760px){.hero{grid-template-columns:1fr;gap:0;min-height:auto}.copy{order:1;text-align:center;padding:20px 4px 0}.planet-art{order:0;max-width:440px;margin:-4px auto -8px}.actions{justify-content:center}h1{font-size:clamp(35px,9vw,49px)}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}.nav{gap:7px}.pill{font-size:12px;padding:8px 11px}}
+@media(max-width:420px){.brand-sub{display:none}.planet-art{margin-top:4px}.cards{gap:9px}.card{padding:14px;min-height:125px}footer{font-size:11px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Pretendard', sans-serif; }
-        
-        body { 
-            background-color: var(--bg); 
-            color: var(--text-main); 
-            line-height: 1.4;
-            min-height: 100vh;
-            background-image: 
-                radial-gradient(circle at 50% 0%, rgba(139, 92, 246, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.08) 0%, transparent 40%);
-            background-attachment: fixed;
-        }
+/* 오른쪽 위 음악 재생 버튼 */
+.header-music{display:flex;align-items:center;gap:9px;padding:6px 10px;border:1px solid #ffffff20;background:#ffffff08;border-radius:999px;backdrop-filter:blur(8px)}
+.music-play{width:32px;height:32px;border:0;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,#bd8cff,#7835c8);color:#fff;box-shadow:0 2px 10px #8b5cf655;cursor:pointer}
+.music-play:hover{filter:brightness(1.12);transform:scale(1.04)}
+.music-volume{display:flex;align-items:center;gap:6px;color:#bdb1d1;font-size:12px}
+.music-volume input{width:68px;accent-color:#a77aff;cursor:pointer}
+.member-page{display:none;padding:12px 0 30px;animation:appear .35s ease}
+.member-page.show{display:block}
+.member-hero{padding:clamp(22px,4vw,42px);border:1px solid #ffffff18;border-radius:22px;background:linear-gradient(135deg,#a16bff16,#ffffff04);margin-bottom:18px}
+.member-hero h2{font-size:clamp(30px,5vw,46px);margin:0 0 10px}
+.member-hero p{margin:0;color:#c8bddb;line-height:1.9}
+.member-group{margin:20px 0}
+.member-group h3{font-size:17px;margin:0 0 12px;color:#eadcff}
+.member-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.member-card{position:relative;overflow:hidden;border:1px solid #ffffff18;border-radius:16px;padding:17px;background:linear-gradient(145deg,#ffffff0d,#ffffff04);min-width:0}
+.member-card:before{content:"";position:absolute;right:-24px;top:-34px;width:90px;height:90px;border-radius:50%;background:#a56bff18;filter:blur(12px)}
+.member-role{position:relative;font-size:11px;color:#c6a4ff;letter-spacing:1px;margin-bottom:12px}
+.member-nick{position:relative;font-size:17px;font-weight:750;overflow-wrap:anywhere}
+.member-alias{position:relative;color:#bdb1d1;font-size:13px;margin-top:6px}
+.member-count{display:inline-block;margin-top:15px;padding:6px 10px;border-radius:999px;background:#a77aff18;color:#d8c3ff;font-size:12px}
+@media(max-width:760px){.member-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:480px){.header-music{gap:6px;padding:5px 7px}.music-volume input{width:48px}.member-grid{grid-template-columns:1fr 1fr}.member-card{padding:13px}.member-nick{font-size:15px}}
 
-        /* Top Header Navigation */
-        header { 
-            background: rgba(9, 13, 22, 0.85); 
-            backdrop-filter: blur(16px);
-            border-bottom: 1px solid var(--card-border);
-            position: fixed; top: 0; left: 0; width: 100%;
-            display: flex; justify-content: space-between; align-items: center; 
-            padding: 10px 32px; z-index: 1000; 
-        }
 
-        .logo { 
-            font-size: 1.05rem; font-weight: 700; color: #fff; 
-            display: flex; align-items: center; gap: 8px; letter-spacing: -0.3px;
-        }
-        .logo-badge {
-            background: var(--accent-glow); color: var(--accent);
-            border: 1px solid rgba(139, 92, 246, 0.3); font-size: 0.75rem;
-            padding: 2px 8px; border-radius: 20px; font-weight: 600;
-        }
-        
-        /* Header Audio Player Bar */
-        .audio-player-container {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid var(--card-border);
-            padding: 6px 14px;
-            border-radius: 20px;
-            backdrop-filter: blur(8px);
-        }
+.rules-page,.tools-page{display:none;padding:12px 0 30px;animation:appear .35s ease}
+.rules-page.show,.tools-page.show{display:block}
+.feature-panel{margin:18px 0;padding:clamp(16px,3vw,26px);border:1px solid #ffffff18;border-radius:22px;background:linear-gradient(135deg,#17122aee,#0c1427ee);box-shadow:0 18px 55px #0003}
+.feature-panel h3{font-size:20px;margin:0 0 12px;color:#e8d9ff}
+.feature-panel p,.feature-panel li{color:#c7bfd8;line-height:1.7}
+.rule-grid,.tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.rule-card,.tool-panel{padding:16px;border-radius:15px;background:#ffffff08;border:1px solid #ffffff16}
+.rule-card h4{margin:0 0 8px;color:#e9dcff}.rule-card p{margin:0;font-size:14px;color:#c9c0da;line-height:1.65}
+.rule-tabs,.game-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0}
+.rule-tab,.game-tab,.action-btn{border:1px solid #ffffff24;background:#ffffff0b;color:#e8defb;padding:9px 13px;border-radius:12px;cursor:pointer}
+.rule-tab.active,.game-tab.active,.action-btn.primary{background:linear-gradient(135deg,#9b65ed,#6732b7);border-color:#ad83ff;color:white}
+.rule-subsection{display:none}.rule-subsection.active{display:block}
+.info-table{width:100%;border-collapse:collapse;margin-top:8px}.info-table th,.info-table td{text-align:left;padding:11px;border-bottom:1px solid #ffffff14}.info-table th{color:#b9a2e9;font-size:13px}
+.calc-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:9px;margin:16px 0}
+.calc-item{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px;border:1px solid #ffffff14;background:#ffffff06;border-radius:12px;color:#e8e0f4;font-size:14px}
+.calc-item input{width:78px;min-width:0;padding:8px;background:#090814;color:white;border:1px solid #ffffff24;border-radius:8px}
+.calc-results{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.calc-result{padding:18px;border-radius:14px;background:#a77aff14;border:1px solid #a77aff30}.calc-result span{display:block;color:#bdb1d1;font-size:13px}.calc-result strong{display:block;margin-top:6px;font-size:clamp(18px,3vw,25px);color:#e8d9ff;overflow-wrap:anywhere}
+.game-stage{min-height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:22px;border-radius:16px;background:#a77aff18;border:1px solid #a77aff35;text-align:center;cursor:pointer;user-select:none}
+.game-stage h4{font-size:24px;margin:0}.game-stage p{color:#c9c0da;margin:0}.hand-row{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}.hand-btn{font-size:25px;padding:12px 20px;border:1px solid #ffffff20;background:#ffffff0a;border-radius:14px;cursor:pointer}
+.game-result{min-height:28px;margin-top:12px;color:#d8c3ff;font-weight:700;text-align:center}
+@media(max-width:560px){.calc-results{grid-template-columns:1fr}.rule-tabs,.game-tabs{gap:6px}.rule-tab,.game-tab{padding:8px 10px;font-size:13px}}
 
-        .play-btn {
-            background: var(--accent);
-            border: none;
-            color: #fff;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 0.75rem;
-            transition: transform 0.15s ease, background 0.15s ease;
-            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.4);
-        }
-
-        .play-btn:hover {
-            transform: scale(1.08);
-            background: #7c3aed;
-        }
-
-        .volume-container {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .volume-icon {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-        }
-
-        .volume-slider {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 70px;
-            height: 4px;
-            border-radius: 2px;
-            background: rgba(255, 255, 255, 0.2);
-            outline: none;
-            cursor: pointer;
-        }
-
-        .volume-slider::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: var(--accent);
-            cursor: pointer;
-            transition: transform 0.15s ease;
-        }
-
-        .volume-slider::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
-
-        nav { display: flex; gap: 4px; }
-        nav a { 
-            color: var(--text-sub); text-decoration: none; padding: 6px 14px; 
-            border-radius: 8px; font-weight: 500; font-size: 0.88rem; transition: 0.15s ease; 
-        }
-        nav a:hover { color: #fff; background: var(--hover-bg); }
-
-        /* Main Container */
-        main { max-width: 960px; margin: 0 auto; padding: 90px 20px 40px; }
-
-        /* Unified Master Tab Dashboard */
-        .dashboard-container {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            backdrop-filter: blur(12px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-
-        /* Top Category Nav Tabs */
-        .category-tabs {
-            display: flex;
-            border-bottom: 1px solid var(--card-border);
-            background: rgba(0, 0, 0, 0.2);
-            padding: 6px;
-            gap: 4px;
-        }
-
-        .cat-tab-btn {
-            flex: 1;
-            padding: 10px 16px;
-            border: none;
-            background: transparent;
-            color: var(--text-sub);
-            font-size: 0.9rem;
-            font-weight: 600;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .cat-tab-btn:hover { color: #fff; background: var(--hover-bg); }
-        .cat-tab-btn.active {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* Sub Filter Selector */
-        .sub-filter-bar {
-            display: flex;
-            gap: 6px;
-            padding: 14px 20px;
-            border-bottom: 1px solid var(--card-border);
-            background: rgba(255, 255, 255, 0.01);
-        }
-
-        .sub-btn {
-            background: transparent;
-            border: 1px solid var(--card-border);
-            color: var(--text-sub);
-            padding: 5px 12px;
-            border-radius: 6px;
-            font-size: 0.82rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: 0.15s;
-        }
-
-        .sub-btn:hover { border-color: rgba(255, 255, 255, 0.2); color: #fff; }
-        .sub-btn.active {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: #fff;
-        }
-
-        /* Content View Panel */
-        .content-panel { padding: 20px; }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; animation: fadeIn 0.2s ease-out; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Compact Data List/Grid System */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 10px;
-        }
-
-        .info-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--card-border);
-            padding: 12px 16px;
-            border-radius: var(--radius);
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .info-card .tag {
-            font-size: 0.72rem; font-weight: 600; color: var(--accent); 
-            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 2px;
-        }
-
-        .info-row {
-            display: flex; justify-content: space-between; align-items: center;
-            font-size: 0.86rem; padding: 2px 0; border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
-        .info-row:last-child { border-bottom: none; }
-        .info-label { color: var(--text-muted); }
-        .info-val { color: var(--text-main); font-weight: 500; }
-
-        /* Compact List View (규칙/안내) */
-        .compact-list { display: flex; flex-direction: column; gap: 8px; }
-        .list-item {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--card-border);
-            padding: 10px 14px;
-            border-radius: 8px;
-            font-size: 0.88rem;
-        }
-        .list-item-title { font-weight: 600; color: #fff; margin-bottom: 3px; display: flex; align-items: center; gap: 6px; }
-        .list-item-sub { color: var(--text-sub); font-size: 0.82rem; padding-left: 12px; border-left: 2px solid var(--card-border); margin-top: 4px; }
-
-        /* Clean Table Style */
-        table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        th { text-align: left; padding: 8px 12px; color: var(--text-muted); font-weight: 600; border-bottom: 1px solid var(--card-border); }
-        td { padding: 8px 12px; color: var(--text-main); border-bottom: 1px solid rgba(255,255,255,0.03); }
-        tr:last-child td { border-bottom: none; }
-
-        /* Bottom Quick Tools Grid */
-        .quick-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
-        .tool-card {
-            background: var(--card-bg); border: 1px solid var(--card-border);
-            border-radius: 14px; padding: 18px; display: flex; justify-content: space-between; align-items: center;
-            cursor: pointer; transition: 0.15s;
-        }
-        .tool-card:hover { border-color: rgba(255, 255, 255, 0.2); background: rgba(255, 255, 255, 0.03); }
-        .tool-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 2px; }
-        .tool-desc { color: var(--text-muted); font-size: 0.8rem; }
-
-        /* Minimal Modal */
-        .modal {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
-            z-index: 2000; justify-content: center; align-items: center;
-        }
-        .modal-content {
-            background: #111622; border: 1px solid var(--card-border); padding: 24px;
-            border-radius: 16px; position: relative; width: 440px; max-width: 90%;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-        }
-        .close-btn {
-            position: absolute; top: 16px; right: 16px; background: none; border: none;
-            color: var(--text-muted); font-size: 1.1rem; cursor: pointer;
-        }
-        .close-btn:hover { color: #fff; }
-
-        /* Mini Games UI Adjustments */
-        .calc-row {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem;
-        }
-        .calc-input {
-            width: 50px; background: #000; border: 1px solid var(--card-border);
-            color: #fff; text-align: center; border-radius: 4px; padding: 2px;
-        }
-        #test-area {
-            height: 160px; border-radius: 10px; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; cursor: pointer; margin-top: 10px;
-            background: var(--accent); transition: 0.2s;
-        }
-    </style>
+</style>
 </head>
 <body>
+<div class="site">
+<div class="stars" aria-hidden="true"></div>
+<div class="portal" id="portal" aria-hidden="true"></div>
+<header>
+  <a class="brand" href="#" data-page="홈" aria-label="포도왕국 홈">
+    <span class="brand-mark">🍇</span>
+    <span><span class="brand-name">포도왕국</span><span class="brand-sub" style="display:block">우리만의 마인크래프트 세계</span></span>
+  </a>
+  <div class="header-music" aria-label="배경 음악 플레이어">
+    <audio id="bgm" loop preload="auto">
+      <source src="https://french0852-lang.github.io/catfruitsite/GrapeKingdoms.mp3" type="audio/mpeg">
+    </audio>
+    <button class="music-play" id="music-play" type="button" aria-label="음악 재생" title="음악 재생">▶</button>
+    <label class="music-volume" title="음량 조절"><span>🔊</span><input id="music-volume" type="range" min="0" max="1" step="0.05" value="0.3" aria-label="음량 조절"></label>
+  </div>
+</header>
+<nav class="nav" aria-label="주요 메뉴">
+  <button class="pill active" data-page="홈">홈</button>
+  <button class="pill" data-page="왕국 소개">왕국 소개</button>
+  <button class="pill" data-page="구성원">구성원</button>
+  <button class="pill" data-page="규칙">규칙</button>
+  <button class="pill" data-page="계산기">계산기</button>
+  <button class="pill" data-page="미니게임">미니게임</button>
+</nav>
+<main>
+  <section id="home-view">
+    <div class="hero">
+      <div class="copy">
+        <div class="eyebrow">✦ 본 사이트는 포도에게 저작권이 있습니다</div>
+        <h1><span class="gradient-text">포도왕국</span></h1>
+        <p class="lead">당신도 최강이 될 수 있습니다</p>
 
-    <header>
-        <div class="logo">
-            🍇 CatFruit <span class="logo-badge">System</span>
-        </div>
-
-        <!-- Center Audio Player -->
-        <div class="audio-player-container">
-            <audio id="bgm" loop autoplay preload="auto">
-                <source src="GrapeKingdoms.mp3" type="audio/mpeg">
-                브라우저가 오디오 태그를 지원하지 않습니다.
-            </audio>
-            <button class="play-btn" id="playBtn" onclick="togglePlay()" title="재생/일시정지">
-                ▶
-            </button>
-            <div class="volume-container">
-                <span class="volume-icon">🔊</span>
-                <input type="range" id="volumeControl" class="volume-slider" min="0" max="1" step="0.05" value="0.3" oninput="changeVolume(this.value)" title="볼륨 조절">
-            </div>
-        </div>
-
-        <nav>
-            <a href="#dashboard">대시보드</a>
-            <a href="#tools">도구 & 미니게임</a>
-        </nav>
-    </header>
-
-    <main id="dashboard">
-        <!-- Integrated Master Card Dashboard -->
-        <div class="dashboard-container">
-            
-            <!-- Category Tabs (Top) -->
-            <div class="category-tabs">
-                <button class="cat-tab-btn active" onclick="switchCategory('members')">👑 섬원 정보</button>
-                <button class="cat-tab-btn" onclick="switchCategory('rules')">📜 규칙 안내</button>
-                <button class="cat-tab-btn" onclick="switchCategory('quota')">📊 기타 정보</button>
-            </div>
-
-            <!-- Category 1: 섬원 정보 -->
-            <div id="cat-members" class="category-panel">
-                <div class="sub-filter-bar">
-                    <button class="sub-btn active" onclick="filterSub(event, 'm-leader')">섬장 / 부섬장</button>
-                    <button class="sub-btn" onclick="filterSub(event, 'm-staff')">간부</button>
-                    <button class="sub-btn" onclick="filterSub(event, 'm-member')">섬원</button>
-                </div>
-                <div class="content-panel">
-                    <div id="m-leader" class="tab-content active">
-                        <div class="info-grid">
-                            <div class="info-card">
-                                <div class="tag">👑 섬장</div>
-                                <div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Grape__</span></div>
-                                <div class="info-row"><span class="info-label">별명</span><span class="info-val">왕포도</span></div>
-                                <div class="info-row"><span class="info-label">정보</span><span class="info-val">28세 / 남</span></div>
-                            </div>
-                            <div class="info-card">
-                                <div class="tag">⭐ 부섬장</div>
-                                <div class="info-row"><span class="info-label">닉네임</span><span class="info-val">XLime__</span></div>
-                                <div class="info-row"><span class="info-label">별명</span><span class="info-val">라임</span></div>
-                                <div class="info-row"><span class="info-label">정보</span><span class="info-val">24세 / 남</span></div>
-                            </div>
-                            <div class="info-card">
-                                <div class="tag">⭐ 부섬장</div>
-                                <div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Yeonsu__</span></div>
-                                <div class="info-row"><span class="info-label">별명</span><span class="info-val">연수</span></div>
-                                <div class="info-row"><span class="info-label">정보</span><span class="info-val">21세 / 남</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="m-staff" class="tab-content">
-                        <div class="info-grid">
-                            <div class="info-card">
-                                <div class="tag">⭐ 간부</div>
-                                <div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Middya__</span></div>
-                                <div class="info-row"><span class="info-label">별명</span><span class="info-val">미땨</span></div>
-                                <div class="info-row"><span class="info-label">정보</span><span class="info-val">27세 / 여</span></div>
-                            </div>
-                            <div class="info-card">
-                                <div class="tag">⭐ 간부</div>
-                                <div class="info-row"><span class="info-label">닉네임</span><span class="info-val">F4nt4__</span></div>
-                                <div class="info-row"><span class="info-label">별명</span><span class="info-val">판타</span></div>
-                                <div class="info-row"><span class="info-label">정보</span><span class="info-val">18세 / 남</span></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="m-member" class="tab-content">
-                        <div class="info-grid">
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Junsu2__ (준수)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">25세 / 남</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Sungju__ (성주)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">24세 / 남</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Lemona__ (레몬)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">20세 / 남</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Ezez__ (이지)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">19세 / 남</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Haeynn__ (해인)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">27세 / 여</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Yedami__ (예담)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">23세 / 여</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Hyebo__ (혜보)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">23세 / 여</span></div></div>
-                            <div class="info-card"><div class="info-row"><span class="info-label">닉네임</span><span class="info-val">Raniii__ (라니)</span></div><div class="info-row"><span class="info-label">정보</span><span class="info-val">21세 / 여</span></div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category 2: 규칙 안내 -->
-            <div id="cat-rules" class="category-panel" style="display: none;">
-                <div class="sub-filter-bar">
-                    <button class="sub-btn active" onclick="filterSub(event, 'r-basic')">기본 규칙</button>
-                    <button class="sub-btn" onclick="filterSub(event, 'r-common')">공용 아이템</button>
-                    <button class="sub-btn" onclick="filterSub(event, 'r-etc')">기타 규칙</button>
-                </div>
-                <div class="content-panel">
-                    <div id="r-basic" class="tab-content active">
-                        <div class="compact-list">
-                            <div class="list-item">
-                                <div class="list-item-title">📌 플레이팜 규칙 준수</div>
-                                <div class="list-item-sub">경고 누적 정지 시 투표를 통해 추방 조치될 수 있습니다.</div>
-                            </div>
-                            <div class="list-item">
-                                <div class="list-item-title">📌 섬 성장 우선순위</div>
-                                <div class="list-item-sub">개인의 성장보다 섬 전체 성장을 최우선으로 합니다. (적절한 사유 없는 은행 출금 금지)</div>
-                            </div>
-                            <div class="list-item">
-                                <div class="list-item-title">📌 단체 행동 필수 참여</div>
-                                <div class="list-item-sub">섬의 이익을 위한 단체 활동 회피 불가 (사전 선약 알림 시 면제)</div>
-                            </div>
-                            <div class="list-item">
-                                <div class="list-item-title">📌 무단 미접속 금지</div>
-                                <div class="list-item-sub">2일 이상 사유 알림 필수 / 3일 이상 무단 미접속 시 기여도 상관없이 추방 투표 진행</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="r-common" class="tab-content">
-                        <div class="compact-list">
-                            <div class="list-item"><div class="list-item-title">작성 중입니다.</div></div>
-                        </div>
-                    </div>
-
-                    <div id="r-etc" class="tab-content">
-                        <div class="compact-list">
-                            <div class="list-item">
-                                <div class="list-item-title">📌 주간 세금 납부</div>
-                                <div class="list-item-sub">미납 시 차주 2배 제출. 2주 이상 무단 미납 시 추방 투표 대상.</div>
-                            </div>
-                            <div class="list-item">
-                                <div class="list-item-title">📌 농장 이용 수칙</div>
-                                <div class="list-item-sub">줄기보호 필수 활성화 / 파손 시설(흙, 씨앗, 유리 등) 즉시 복구</div>
-                            </div>
-                            <div class="list-item">
-                                <div class="list-item-title">📌 잠금 상자 제한</div>
-                                <div class="list-item-sub">지정 구역 외 잠금 상자 설치 금지 (건축/인테리어 일정 고려)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Category 3: 기타 정보 -->
-            <div id="cat-quota" class="category-panel" style="display: none;">
-                <div class="sub-filter-bar">
-                    <button class="sub-btn active" onclick="filterSub(event, 'q-tax')">주간 세금</button>
-                    <button class="sub-btn" onclick="filterSub(event, 'q-cook')">요리 점수</button>
-                    <button class="sub-btn" onclick="filterSub(event, 'q-guideline')">준수 내용</button>
-                </div>
-                <div class="content-panel">
-                    <div id="q-tax" class="tab-content active">
-                        <table>
-                            <thead><tr><th>항목</th><th>내용 및 금액</th></tr></thead>
-                            <tbody>
-                                <tr><td><strong>섬 은행 입금</strong></td><td>매주 1회 10,000,000 원 이상 입금 후 은행 내역 작성</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="q-cook" class="tab-content">
-                        <table>
-                            <thead><tr><th>분류</th><th>부여 점수</th></tr></thead>
-                            <tbody>
-                                <tr><td>사랑의 도시락</td><td>개당 100 점</td></tr>
-                                <tr><td>신비의 결정</td><td>개당 35 점</td></tr>
-                                <tr><td>황금 쿠키</td><td>세트당 40 점</td></tr>
-                                <tr><td>달콤한 당근빵 / 사악한 수박</td><td>세트당 35 점</td></tr>
-                                <tr><td>악마의 사탕</td><td>세트당 30 점</td></tr>
-                                <tr><td>멜론빵</td><td>세트당 25 점</td></tr>
-                                <tr><td>햄버거</td><td>세트당 20 점</td></tr>
-                                <tr><td>파도의 결정</td><td>개당 5 점</td></tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div id="q-guideline" class="tab-content">
-                        <div class="compact-list">
-                            <div class="list-item"><div class="list-item-title">기여도 순위는 디스코드 기여순위 채널에서 확인 가능합니다.</div></div>
-                            <div class="list-item"><div class="list-item-title">요리 제출 확인은 수시로 체크하므로 언급을 자제해주세요.</div></div>
-                            <div class="list-item"><div class="list-item-title">섬 은행 돈 입금 시 반드시 디스코드 은행 채널에 내역을 남겨주세요.</div></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Quick Tools Bottom Dashboard -->
-        <h3 id="tools" style="font-size: 1.05rem; color: var(--text-sub); margin-bottom: 12px;">🛠️️ 빠른 도구 & 유틸리티</h3>
-        <div class="quick-grid">
-            <div class="tool-card" onclick="openModal('calcModal')">
-                <div>
-                    <div class="tool-title">🧮 자산 계산기</div>
-                    <div class="tool-desc">수박, 광물, 블록 수량 합산 연산</div>
-                </div>
-                <span style="color: var(--accent);">열기 →</span>
-            </div>
-            <div class="tool-card" onclick="openModal('minigameModal')">
-                <div>
-                    <div class="tool-title">🎮 미니게임 모음</div>
-                    <div class="tool-desc">룰렛 / 가위바위보 / 반응속도 테스트</div>
-                </div>
-                <span style="color: var(--accent);">열기 →</span>
-            </div>
-        </div>
-    </main>
-
-    <!-- Modal: 자산 계산기 -->
-    <div id="calcModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('calcModal')">✕</button>
-            <h3 style="margin-bottom: 16px; font-size: 1.1rem;">🧮 자산 계산기</h3>
-            
-            <div style="max-height: 280px; overflow-y: auto; margin-bottom: 16px; padding-right: 4px;">
-                <div class="calc-row"><span>아삭한 수박 (24,960원)</span><input type="number" id="calc-crispyWatermelon" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>달달한 호박 (54,080원)</span><input type="number" id="calc-sweetpumkin" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>사악한 수박 (349,440원)</span><input type="number" id="calc-evilWatermelon" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>햄버거 (204,288원)</span><input type="number" id="calc-burger" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>광물주머니 (163,968원)</span><input type="number" id="calc-oreBag" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>철 블록 (23,215원)</span><input type="number" id="calc-ironBlock" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>금 블록 (31,450원)</span><input type="number" id="calc-goldBlock" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>다이아 블록 (50,920원)</span><input type="number" id="calc-diamondBlock" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-                <div class="calc-row"><span>에메랄드 블록 (58,410원)</span><input type="number" id="calc-emeraldBlock" value="0" min="0" oninput="updateTotal()" class="calc-input"></div>
-            </div>
-
-            <div style="background: rgba(255,255,255,0.03); border: 1px solid var(--card-border); padding: 12px; border-radius: 8px; text-align: center;">
-                <div style="font-size: 0.8rem; color: var(--text-muted);">총 금액 / 점수</div>
-                <div id="calc-total-amount" style="font-size: 1.2rem; font-weight: 700; color: #fff;">0 원</div>
-                <div id="calc-total-score" style="font-size: 0.9rem; color: var(--accent); font-weight: 600;">0 점</div>
-            </div>
-        </div>
+      </div>
+      <div class="planet-art" aria-label="별이 빛나는 우주에 떠 있는 포도 행성">
+        <div class="planet-glow"></div>
+        <img src="grape-planet.png" alt="보라색 포도 알갱이로 이루어진 카툰 행성이 별이 빛나는 우주에 떠 있는 모습">
+      </div>
     </div>
-
-    <!-- Modal: 미니게임 선택 -->
-    <div id="minigameModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal('minigameModal')">✕</button>
-            <h3 style="margin-bottom: 16px; font-size: 1.1rem;">🎮 미니게임</h3>
-            <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-                <button class="sub-btn active" onclick="switchGame('reflex')">반응속도</button>
-                <button class="sub-btn" onclick="switchGame('rpc')">가위바위보</button>
-            </div>
-
-            <div id="game-reflex">
-                <div id="test-area" onclick="handleReflex()">
-                    <div id="rt-main" style="font-weight: 700; font-size: 1.2rem;">시작하기</div>
-                    <div id="rt-sub" style="font-size: 0.8rem; opacity: 0.8;">클릭하여 테스트</div>
-                </div>
-            </div>
-
-            <div id="game-rpc" style="display: none; text-align: center;">
-                <div style="font-size: 2rem; margin: 15px 0;"><span id="userHand">❓</span> vs <span id="aiHand">❓</span></div>
-                <div style="display: flex; gap: 6px;">
-                    <button class="sub-btn" style="flex:1" onclick="playRPC('scissors')">✌️</button>
-                    <button class="sub-btn" style="flex:1" onclick="playRPC('rock')">✊</button>
-                    <button class="sub-btn" style="flex:1" onclick="playRPC('paper')">🖐️</button>
-                </div>
-                <div id="rpcResult" style="margin-top: 12px; font-weight: 600; color: var(--accent);"></div>
-            </div>
-        </div>
+    <div class="section-head">
+      <div><h2>목록</h2><p>아래 목록을 클릭하여 확인 해보세요</p></div>
+      <span class="sparkle">✦ 뭐라고 적고싶어서 적어놓은 글</span>
     </div>
+    <div class="cards">
+      <button class="card" data-page="왕국 소개"><div class="card-icon">🌌</div><div class="card-title">왕국 소개</div><div class="card-desc">우리 세계의 이야기</div></button>
+      <button class="card" data-page="구성원"><div class="card-icon">👑</div><div class="card-title">구성원</div><div class="card-desc">왕국을 함께 만드는 사람들</div></button>
+      <button class="card" data-page="규칙"><div class="card-icon">📜</div><div class="card-title">규칙</div><div class="card-desc">모두가 지켜야 할 약속</div></button>
+      <button class="card" data-page="계산기"><div class="card-icon">🧮</div><div class="card-title">계산기</div><div class="card-desc">아이템 가치와 점수 계산</div></button>
+      <button class="card" data-page="미니게임"><div class="card-icon">🎮</div><div class="card-title">미니게임</div><div class="card-desc">반응속도 · 가위바위보</div></button>
+    </div>
+  </section>
+  <section id="intro-page" class="intro-page" aria-label="왕국 소개">
+    <div class="intro-hero">
+      <div class="intro-kicker">🍇 포도왕국에 오신 것을 환영합니다</div>
+      <h2><span class="gradient-text">포도왕국을 소개합니다</span></h2>
+      <p>아래에서 포도왕국에 대해 알아가보세요</p>
+      <div class="intro-quote">“당신도 최강이 될 수 있습니다. 우리 같이 햄버거를 만들어 볼까요?”</div>
+    </div>
+    <div class="intro-grid">
+      <article class="intro-block"><h3>👑 포도왕국</h3><p>현재 포도왕국은 유일하게 모든 랭킹회차를<br>TOP 10 이내로 유지중인 서버 최강 랭킹섬 입니다<br>이는 앞으로도 계속 유지됩니다</p></article>
+      <article class="intro-block"><h3>🤝 농장안내</h3><p>호박, 수박 대량상점이 섬 스폰에 설치되어 있습니다.<br>크게 부족하지 않을 만큼 모든 농장이 크게 증축되어 있습니다</p></article>
+      <article class="intro-block"><h3>🌌 공용도구</h3><p>본 섬은 개인도구필수이며, 공용도구를 지급해드리지 않습니다<br>단, 일부 섬원이 빠른 성장을 위해 도구를 대여 해드리긴 합니다</p></article>
+      <article class="intro-block"><h3>✨ 디스코드 안내</h3><p>아래 링크를 통해 디스코드 가입이 가능합니다.<br>https://discord.gg/pXAX5u7b6m</p></article>
+    </div>
+    <div class="intro-block">
+      <h3>📖 섬원 모집 조건</h3>
+      <ul>
+        <li>Ⅰ. 서버 등급 "황제" 이상</li>
+        <li>Ⅱ. 각성 도끼 및 각성 괭이 보유자</li>
+        <li>Ⅲ. 디스코드 가입 및 마이크 사용 가능자</li>
+        <li>Ⅳ. 개인 플레이를 하지 않는 유저</li>
+      </ul>
+      <p class="intro-note">※ 섬원은 남는 자리가 있을 경우 상시 모집 합니다. 많은 지원 바랍니다.</p>
+    </div>
+    <div style="text-align:center;margin-top:22px"><button class="pill active" data-page="홈">← 첫 화면으로</button></div>
+  </section>
 
-    <script>
-        /* Music Player Script */
-        const audio = document.getElementById('bgm');
-        const playBtn = document.getElementById('playBtn');
+  <section id="member-page" class="member-page" aria-label="구성원">
+    <div class="member-hero">
+      <div class="intro-kicker">🍇 포도왕국의 사람들</div>
+      <h2><span class="gradient-text">왕국을 함께 만드는 구성원</span></h2>
+      <p>포도왕국을 함께 키워 가는 구성원들을 소개합니다.</p>
+      <span class="member-count">총 13명</span>
+    </div>
+    <div class="member-group">
+      <h3>👑 섬장 및 부섬장</h3>
+      <div class="member-grid">
+        <article class="member-card"><div class="member-role">👑 섬장</div><div class="member-nick">Grape__</div><div class="member-alias">별명 · 왕포도</div></article>
+        <article class="member-card"><div class="member-role">⭐ 부섬장</div><div class="member-nick">XLime__</div><div class="member-alias">별명 · 라임</div></article>
+        <article class="member-card"><div class="member-role">⭐ 부섬장</div><div class="member-nick">Yeonsu__</div><div class="member-alias">별명 · 연수</div></article>
+      </div>
+    </div>
+    <div class="member-group">
+      <h3>🛡️ 간부</h3>
+      <div class="member-grid">
+        <article class="member-card"><div class="member-role">⭐ 간부</div><div class="member-nick">Middya__</div><div class="member-alias">별명 · 미땨</div></article>
+        <article class="member-card"><div class="member-role">⭐ 간부</div><div class="member-nick">F4nt4__</div><div class="member-alias">별명 · 판타</div></article>
+      </div>
+    </div>
+    <div class="member-group">
+      <h3>💜 섬원</h3>
+      <div class="member-grid">
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Junsu2__</div><div class="member-alias">별명 · 준수</div></article>
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Sungju__</div><div class="member-alias">별명 · 성주</div></article>
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Lemona__</div><div class="member-alias">별명 · 레몬</div></article>
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Ezez__</div><div class="member-alias">별명 · 이지</div></article>
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Haeynn__</div><div class="member-alias">별명 · 해인</div></article>
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Yedami__</div><div class="member-alias">별명 · 예담</div></article>
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Hyebo__</div><div class="member-alias">별명 · 혜보</div></article>
+        <article class="member-card"><div class="member-role">섬원</div><div class="member-nick">Raniii__</div><div class="member-alias">별명 · 라니</div></article>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:22px"><button class="pill active" data-page="홈">← 첫 화면으로</button></div>
+  </section>
 
-        // 기본 음량 설정 (30%)
-        audio.volume = 0.3;
+  <section id="rules-page" class="rules-page" aria-label="왕국 규칙">
+    <div class="member-hero"><div class="intro-kicker">📜 포도왕국 규칙 안내</div><h2><span class="gradient-text">왕국의 규칙</span></h2><p>한번씩 읽어보시고 반드시 지켜주세요</p></div>
+    <div class="rule-tabs" role="tablist"><button class="rule-tab active" data-rule-tab="basic">기본 규칙</button><button class="rule-tab" data-rule-tab="common">공용아이템</button><button class="rule-tab" data-rule-tab="etc">기타 규칙</button><button class="rule-tab" data-rule-tab="tax">주간 세금</button><button class="rule-tab" data-rule-tab="cook">요리 점수</button><button class="rule-tab" data-rule-tab="guideline">기타 내용</button></div>
+    <div class="feature-panel rule-subsection active" data-rule-section="basic"><div class="rule-grid">
+      <article class="rule-card"><h4>📌 플레이팜 규칙 준수</h4><p>경고 누적으로 정지 시 투표를 통해 추방 조치될 수 있습니다.</p></article>
+      <article class="rule-card"><h4>📌 섬 성장 우선</h4><p>개인의 성장보다 섬 전체 성장을 최우선으로 해야 합니다.</p></article>
+      <article class="rule-card"><h4>📌 단체 행동 필참</h4><p>섬의 이익을 위한 단체 활동은 필수입니다. 사전 선약을 알리면 면제됩니다.</p></article>
+      <article class="rule-card"><h4>📌 무단 미접속 금지</h4><p>3일 이상 미접속 시 사유 알림 필수. 3일 이상 무단 미접속 시 기여도와 관계없이 추방 될 수 있습니다.</p></article>
+    </div></div>
+    <div class="feature-panel rule-subsection" data-rule-section="common"><h3>📦 공용 아이템</h3><p>본 섬은 공용 아이템을 지급해드리지 않습니다. 빠른 시일내에 개인도구를 구비하세요.</p></div>
+    <div class="feature-panel rule-subsection" data-rule-section="etc"><div class="rule-grid"><article class="rule-card"><h4>📌 주간 세금 납부</h4><p>미납 시 다음 주 세금에 미납세금 1.5배 추가 제출. 2주 이상 무단 미납 시 추방 투표 대상이 될 수 있습니다.</p></article><article class="rule-card"><h4>📌 농장 이용 수칙</h4><p>줄기보호 필수 활성화. 파손 시(흙, 씨앗, 유리 등) 즉시 복구 해주세요.</p></article><article class="rule-card"><h4>📌 잠금 상자 제한</h4><p>지정 구역 외 잠금 상자 설치 금지(건축/인테리어 일정 고려).</p></article></div></div>
+    <div class="feature-panel rule-subsection" data-rule-section="tax"><h3>💰 주간 세금</h3><table class="info-table"><thead><tr><th>항목</th><th>내용 및 금액</th></tr></thead><tbody><tr><td>섬 은행 입금</td><td>매주 1회 10,000,000원 이상 입금 후 은행 내역 작성</td></tr></tbody></table></div>
+    <div class="feature-panel rule-subsection" data-rule-section="cook"><h3>🍔 요리 점수</h3><table class="info-table"><thead><tr><th>분류</th><th>부여 점수</th></tr></thead><tbody><tr><td>사랑의 도시락</td><td>개당 100점</td></tr><tr><td>신비의 결정</td><td>개당 35점</td></tr><tr><td>황금 쿠키</td><td>세트당 40점</td></tr><tr><td>달콤한 당근빵 / 사악한 수박</td><td>세트당 35점</td></tr><tr><td>악마의 사탕</td><td>세트당 30점</td></tr><tr><td>멜론빵</td><td>세트당 25점</td></tr><tr><td>햄버거</td><td>세트당 20점</td></tr><tr><td>파도의 결정</td><td>개당 5점</td></tr></tbody></table></div>
+    <div class="feature-panel rule-subsection" data-rule-section="guideline"><div class="rule-grid"><article class="rule-card"><h4>기여도 순위</h4><p>디스코드 기여순위 채널에서 확인 가능합니다.</p></article><article class="rule-card"><h4>요리 제출 확인</h4><p>요리 제출상자 상단 레드스톤 조명 ON/OFF를 이용해주세요.</p></article><article class="rule-card"><h4>은행 입금 내역</h4><p>섬 은행에 돈을 입금하면 반드시 디스코드 은행 채널에 내역을 남겨주세요.</p></article></div></div>
+    <div style="text-align:center;margin-top:22px"><button class="pill active" data-page="홈">← 첫 화면으로</button></div>
+  </section>
+  <section id="tools-page" class="tools-page" aria-label="계산기와 미니게임">
+    <div class="member-hero"><div class="intro-kicker">🍇 포도왕국 도구</div><h2><span class="gradient-text" id="tools-page-title">계산기</span></h2><p id="tools-page-desc">아이템 수량을 입력하면 총 금액과 점수를 계산할 수 있습니다.</p></div>
+    <div class="feature-panel" data-tool-section="calculator"><h3>🧮 자산 계산기</h3><p>모든 아이템은 최대시세 기준 입니다.</p><div class="calc-list">
+      <label class="calc-item">아삭한 수박 · 24,960원<input type="number" min="0" step="1" value="0" data-item="crispyWatermelon" aria-label="아삭한 수박 수량"></label>
+      <label class="calc-item">달달한 호박 · 54,080원<input type="number" min="0" step="1" value="0" data-item="sweetpumkin" aria-label="달달한 호박 수량"></label>
+      <label class="calc-item">사악한 수박 · 349,440원<input type="number" min="0" step="1" value="0" data-item="evilWatermelon" aria-label="사악한 수박 수량"></label>
+      <label class="calc-item">햄버거 · 204,288원<input type="number" min="0" step="1" value="0" data-item="burger" aria-label="햄버거 수량"></label>
+      <label class="calc-item">광물주머니 · 163,968원<input type="number" min="0" step="1" value="0" data-item="oreBag" aria-label="광물주머니 수량"></label>
+      <label class="calc-item">철 블록 · 23,215원<input type="number" min="0" step="1" value="0" data-item="ironBlock" aria-label="철 블록 수량"></label>
+      <label class="calc-item">금 블록 · 31,450원<input type="number" min="0" step="1" value="0" data-item="goldBlock" aria-label="금 블록 수량"></label>
+      <label class="calc-item">다이아 블록 · 50,920원<input type="number" min="0" step="1" value="0" data-item="diamondBlock" aria-label="다이아 블록 수량"></label>
+      <label class="calc-item">에메랄드 블록 · 58,410원<input type="number" min="0" step="1" value="0" data-item="emeraldBlock" aria-label="에메랄드 블록 수량"></label>
+      <label class="calc-item">무지개결정 · 50,000원<input type="number" min="0" step="1" value="0" data-item="rainbowCrystal" aria-label="무지개결정 수량"></label>
+      <label class="calc-item">파도의결정 · 50,000원<input type="number" min="0" step="1" value="0" data-item="waveCrystal" aria-label="파도의결정 수량"></label>
+      <label class="calc-item">신비의결정 · 364,000원<input type="number" min="0" step="1" value="0" data-item="mysticCrystal" aria-label="신비의결정 수량"></label>
+      <label class="calc-item">사랑의도시락 · 1,300,000원<input type="number" min="0" step="1" value="0" data-item="loveLunchbox" aria-label="사랑의도시락 수량"></label>
+    </div><div class="calc-results"><div class="calc-result"><span>총 금액</span><strong id="calc-total-amount">0원</strong></div><div class="calc-result"><span>총 점수</span><strong id="calc-total-score">0점</strong></div></div><button class="action-btn" id="calc-reset" style="margin-top:14px">수량 초기화</button></div>
+    <div class="feature-panel" data-tool-section="minigame"><h3>🎮 미니게임 모음</h3><div class="game-tabs"><button class="game-tab active" data-game-tab="reflex">⚡ 반응속도</button><button class="game-tab" data-game-tab="rpc">✌️ 가위바위보</button></div>
+      <div id="game-reflex" class="game-view"><div id="reflex-stage" class="game-stage" role="button" tabindex="0"><h4 id="reflex-main">시작하기</h4><p id="reflex-sub">눌러서 시작 · 초록색으로 바뀌면 빠르게 클릭!</p></div><div id="reflex-result" class="game-result"></div></div>
+      <div id="game-rpc" class="game-view" style="display:none"><div class="hand-row"><button class="hand-btn" data-hand="scissors" aria-label="가위">✌️</button><button class="hand-btn" data-hand="rock" aria-label="바위">✊</button><button class="hand-btn" data-hand="paper" aria-label="보">🖐️</button></div><div class="game-result" id="rpc-result">가위, 바위, 보 중 하나를 선택하세요.</div></div>
+</div>
+    <div style="text-align:center;margin-top:22px"><button class="pill active" data-page="홈">← 첫 화면으로</button></div>
+  </section>
 
-        // 자동재생 처리 및 버튼 상태 업데이트
-        window.addEventListener('DOMContentLoaded', () => {
-            const playPromise = audio.play();
-            if (playPromise !== undefined) {
-                playPromise.then(() => {
-                    playBtn.innerText = '❚❚';
-                }).catch(() => {
-                    // 브라우저 자동재생 차단 정책이 작동할 경우
-                    playBtn.innerText = '▶';
-                    // 사용자가 페이지의 어디든 클릭하면 바로 음악 재생 시도
-                    document.body.addEventListener('click', () => {
-                        if (audio.paused) {
-                            audio.play();
-                            playBtn.innerText = '❚❚';
-                        }
-                    }, { once: true });
-                });
-            }
+  <section id="inner-view" class="content-section" aria-live="polite">
+    <div class="eyebrow">🍇 포도왕국</div>
+    <h2 id="inner-title">왕국 소개</h2>
+    <p id="inner-desc">포도왕국의 세계관과 콘텐츠를 소개합니다.</p>
+    <button class="pill active" data-page="홈">처음으로</button>
+  </section>
+  <p class="status" id="status">포도왕국 · 모험은 여기서 시작됩니다</p>
+</main>
+<footer><span>🍇 포도왕국</span><span>Grape__</span></footer>
+</div>
+<script>
+(() => {
+  const pages = {
+    "홈": ["활동 서버", "포도왕국은 1.21.4 버전의 플레이팜(playf.kr)에서 활동 중입니다.", "포도왕국 · 전설의 이야기"],
+    "왕국 소개": ["왕국 소개", "포도왕국을 소개합니다.", "포도왕국 소개를 확인하고 있습니다."],
+    "구성원": ["구성원", "포도왕국의 구성원을 소개합니다.", "왕국을 함께 만드는 사람들"],
+    "규칙": ["규칙", "포도왕국 규칙을 안내합니다.", "모두가 지켜야 할 약속"],
+    "계산기": ["계산기", "아이템 수량을 입력해 총 금액과 점수를 계산할 수 있습니다.", "포도왕국 계산기"],
+    "미니게임": ["미니게임", "반응속도 테스트와 가위바위보를 즐겨보세요.", "포도왕국 미니게임"]
+  };
+  const portal = document.getElementById("portal");
+  const home = document.getElementById("home-view");
+  const inner = document.getElementById("inner-view");
+  const intro = document.getElementById("intro-page");
+  const members = document.getElementById("member-page");
+  const rules = document.getElementById("rules-page");
+  const tools = document.getElementById("tools-page");
+  const status = document.getElementById("status");
+
+  document.querySelectorAll("[data-page]").forEach(button => {
+    button.addEventListener("click", () => {
+      const key = button.dataset.page || "홈";
+      const page = pages[key] || pages["홈"];
+      portal.classList.add("active");
+      window.setTimeout(() => {
+        home.style.display = key === "홈" ? "" : "none";
+        inner.classList.remove("show");
+        intro.classList.remove("show");
+        members.classList.remove("show");
+        rules.classList.remove("show");
+        tools.classList.remove("show");
+        document.querySelectorAll("[data-tool-section]").forEach(section => section.style.display = "");
+
+        if (key === "왕국 소개") {
+          intro.classList.add("show");
+        } else if (key === "구성원") {
+          members.classList.add("show");
+        } else if (key === "규칙") {
+          rules.classList.add("show");
+        } else if (key === "계산기" || key === "미니게임") {
+          tools.classList.add("show");
+          const toolSection = key === "계산기" ? "calculator" : "minigame";
+          document.querySelectorAll("[data-tool-section]").forEach(section => { section.style.display = section.dataset.toolSection === toolSection ? "" : "none"; });
+          document.getElementById("tools-page-title").textContent = key;
+          document.getElementById("tools-page-desc").textContent = page[1];
+        } else if (key !== "홈") {
+          inner.classList.add("show");
+          document.getElementById("inner-title").textContent = page[0];
+          document.getElementById("inner-desc").textContent = page[1];
+        }
+
+        status.textContent = page[2];
+        document.querySelectorAll(".nav .pill").forEach(navButton => {
+          navButton.classList.toggle("active", navButton.dataset.page === key);
         });
+        portal.classList.remove("active");
+        if (key !== "홈") window.scrollTo({top: 0, behavior: "smooth"});
+      }, 220);
+    });
+  });
 
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerText = '❚❚';
-            } else {
-                audio.pause();
-                playBtn.innerText = '▶';
-            }
-        }
 
-        function changeVolume(val) {
-            audio.volume = val;
-        }
-
-        /* Category Switcher */
-        function switchCategory(catId) {
-            document.querySelectorAll('.category-panel').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.cat-tab-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById('cat-' + catId).style.display = 'block';
-            event.currentTarget.classList.add('active');
-        }
-
-        /* Sub Tab Filter */
-        function filterSub(event, targetId) {
-            const container = event.currentTarget.closest('.category-panel');
-            container.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            container.querySelectorAll('.sub-btn').forEach(btn => btn.classList.remove('active'));
-
-            document.getElementById(targetId).classList.add('active');
-            event.currentTarget.classList.add('active');
-        }
-
-        /* Modal Handler */
-        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
-        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        /* Calculator Script */
-        function updateTotal() {
-            const prices = { crispyWatermelon: 24960, sweetpumkin: 54080, evilWatermelon: 349440, burger: 204288, oreBag: 163968, ironBlock: 23215, goldBlock: 31450, diamondBlock: 50920, emeraldBlock: 58410 };
-            const scores = { evilWatermelon: 29868.8, burger: 17459.2, oreBag: 12409.6, ironBlock: 1696, goldBlock: 2304, diamondBlock: 3916.8, emeraldBlock: 4492.8 };
-
-            let money = 0, score = 0;
-            for(let k in prices) {
-                let cnt = parseInt(document.getElementById('calc-' + k).value) || 0;
-                money += cnt * prices[k];
-                if(scores[k]) score += cnt * scores[k];
-            }
-            document.getElementById('calc-total-amount').innerText = money.toLocaleString() + " 원";
-            document.getElementById('calc-total-score').innerText = score.toLocaleString() + " 점";
-        }
-
-        /* Game Script */
-        function switchGame(game) {
-            document.getElementById('game-reflex').style.display = game === 'reflex' ? 'block' : 'none';
-            document.getElementById('game-rpc').style.display = game === 'rpc' ? 'block' : 'none';
-        }
-
-        let rtStatus = 'init', rtStart, rtTimeout;
-        function handleReflex() {
-            const area = document.getElementById('test-area'), main = document.getElementById('rt-main'), sub = document.getElementById('rt-sub');
-            if(rtStatus === 'init' || rtStatus === 'result') {
-                rtStatus = 'waiting'; area.style.background = '#ef4444'; main.innerText = "기다리세요...";
-                rtTimeout = setTimeout(() => {
-                    rtStatus = 'go'; area.style.background = '#10b981'; main.innerText = "클릭!!"; rtStart = performance.now();
-                }, Math.random()*2000 + 1500);
-            } else if(rtStatus === 'waiting') {
-                clearTimeout(rtTimeout); rtStatus = 'result'; area.style.background = '#334155'; main.innerText = "너무 빨라요!";
-            } else if(rtStatus === 'go') {
-                const time = Math.floor(performance.now() - rtStart);
-                rtStatus = 'result'; area.style.background = 'var(--accent)'; main.innerText = time + " ms"; sub.innerText = "다시 하려면 클릭";
-            }
-        }
-
-        function playRPC(u) {
-            const h = {rock:'✊', scissors:'✌️', paper:'🖐️'};
-            const a = ['rock','scissors','paper'][Math.floor(Math.random()*3)];
-            document.getElementById('userHand').innerText = h[u]; document.getElementById('aiHand').innerText = h[a];
-            let r = (u===a) ? "무승부" : ((u==='rock'&&a==='scissors')||(u==='scissors'&&a==='paper')||(u==='paper'&&a==='rock')) ? "승리! 🍇" : "패배";
-            document.getElementById('rpcResult').innerText = r;
-        }
-    </script>
+  // 규칙 하위 메뉴
+  document.querySelectorAll("[data-rule-tab]").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll("[data-rule-tab]").forEach(b => b.classList.toggle("active", b === btn));
+    document.querySelectorAll("[data-rule-section]").forEach(section => section.classList.toggle("active", section.dataset.ruleSection === btn.dataset.ruleTab));
+  }));
+  // 자산 계산기: 가격과 점수는 원본 CatFruit System의 값 그대로
+  const itemPrices = {crispyWatermelon:24960,sweetpumkin:54080,evilWatermelon:349440,burger:204288,oreBag:163968,ironBlock:23215,goldBlock:31450,diamondBlock:50920,emeraldBlock:58410,rainbowCrystal:50000,waveCrystal:50000,mysticCrystal:364000,loveLunchbox:1300000};
+  const itemScores = {evilWatermelon:33600,burger:17459.2,oreBag:12409.6,ironBlock:1696,goldBlock:2304,diamondBlock:3916.8,emeraldBlock:4492.8,rainbowCrystal:0,waveCrystal:5000,mysticCrystal:28000,loveLunchbox:142857.1};
+  const calcInputs = [...document.querySelectorAll("[data-item]")];
+  function updateCalculator(){let money=0,score=0;calcInputs.forEach(input=>{const n=Math.max(0,Number.parseInt(input.value,10)||0),key=input.dataset.item;money+=n*itemPrices[key];score+=n*(itemScores[key]||0)});document.getElementById("calc-total-amount").textContent=money.toLocaleString("ko-KR")+"원";document.getElementById("calc-total-score").textContent=score.toLocaleString("ko-KR")+"점";}
+  calcInputs.forEach(input=>input.addEventListener("input",updateCalculator));
+  document.getElementById("calc-reset").addEventListener("click",()=>{calcInputs.forEach(input=>input.value=0);updateCalculator()});
+  // 미니게임 탭
+  document.querySelectorAll("[data-game-tab]").forEach(btn=>btn.addEventListener("click",()=>{document.querySelectorAll("[data-game-tab]").forEach(b=>b.classList.toggle("active",b===btn));document.querySelectorAll(".game-view").forEach(v=>v.style.display="none");document.getElementById("game-"+btn.dataset.gameTab).style.display="block";}));
+  // 반응속도 테스트
+  const reflexStage=document.getElementById("reflex-stage"), reflexMain=document.getElementById("reflex-main"), reflexSub=document.getElementById("reflex-sub"), reflexResult=document.getElementById("reflex-result");
+  let reflexState="ready",reflexTimer=null,reflexStart=0;
+  function handleReflex(){if(reflexState==="ready"||reflexState==="result"){clearTimeout(reflexTimer);reflexState="waiting";reflexStage.style.background="#7f1d1d";reflexMain.textContent="기다리세요…";reflexSub.textContent="초록색으로 바뀌기 전에는 누르지 마세요";reflexResult.textContent="";reflexTimer=setTimeout(()=>{reflexState="go";reflexStage.style.background="#166534";reflexMain.textContent="지금 클릭!";reflexSub.textContent="초록색이 된 순간 클릭하세요";reflexStart=performance.now()},1000+Math.random()*3000)}else if(reflexState==="waiting"){clearTimeout(reflexTimer);reflexState="result";reflexStage.style.background="";reflexMain.textContent="너무 빨라요!";reflexSub.textContent="다시 눌러서 도전하세요";reflexResult.textContent="초록색이 되기 전에 눌렀습니다."}else if(reflexState==="go"){const ms=Math.round(performance.now()-reflexStart);reflexState="result";reflexStage.style.background="";reflexMain.textContent=ms+" ms";reflexSub.textContent="다시 하려면 클릭하세요";reflexResult.textContent=ms<200?"번개처럼 빠르네요! 🍇":ms<300?"반응이 꽤 빠릅니다!":"한 번 더 도전해 보세요!"}}
+  reflexStage.addEventListener("click",handleReflex);reflexStage.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();handleReflex()}});
+  // 가위바위보
+  const handEmoji={rock:"✊",scissors:"✌️",paper:"🖐️"};
+  document.querySelectorAll("[data-hand]").forEach(btn=>btn.addEventListener("click",()=>{const user=btn.dataset.hand,opts=["rock","scissors","paper"],ai=opts[Math.floor(Math.random()*3)];let result=user===ai?"무승부!":((user==="rock"&&ai==="scissors")||(user==="scissors"&&ai==="paper")||(user==="paper"&&ai==="rock"))?"승리! 🍇":"패배! 다음 판에 이겨봐요";document.getElementById("rpc-result").textContent=handEmoji[user]+" vs "+handEmoji[ai]+" — "+result}));
+// 기존 사이트의 배경음악 재생/일시정지 및 음량 조절
+  const audio = document.getElementById("bgm");
+  const playButton = document.getElementById("music-play");
+  const volume = document.getElementById("music-volume");
+  audio.volume = Number(volume.value);
+  playButton.addEventListener("click", async () => {
+    if (audio.paused) {
+      try {
+        await audio.play();
+        playButton.textContent = "Ⅱ";
+        playButton.setAttribute("aria-label", "음악 일시정지");
+        playButton.title = "음악 일시정지";
+      } catch (error) {
+        playButton.textContent = "▶";
+        playButton.title = "음악 파일을 불러오지 못했어요. MP3 파일 경로를 확인해 주세요.";
+      }
+    } else {
+      audio.pause();
+      playButton.textContent = "▶";
+      playButton.setAttribute("aria-label", "음악 재생");
+      playButton.title = "음악 재생";
+    }
+  });
+  volume.addEventListener("input", () => { audio.volume = Number(volume.value); });
+  audio.addEventListener("ended", () => {
+    playButton.textContent = "▶";
+    playButton.setAttribute("aria-label", "음악 재생");
+  });
+})();
+</script>
 </body>
 </html>
